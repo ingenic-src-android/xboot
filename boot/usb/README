@@ -1,0 +1,49 @@
+Fastboot tool guide
+
+1. copy android-sdk-windows-1.5_r2.zip on host PC and unpack it.
+2. copy android_usb.inf from work:users\cjfeng\x86 to android-sdk-windows-1.5_r2\usb_driver\x86 on host PC.
+3. press SW4 longer and power on to enter fastboot mode.
+4. press SW5 longer and power on to enter recovery mode.
+
+The following is fastboot command:
+
+1. list all of fastboot argument:
+
+   fastboot.exe
+
+2. see the current fastboot version:
+
+   fastboot.exe getvar version
+
+3. flash all of partition:
+
+   fastboot.exe -p apus flashall
+
+   A fold named target/product/apus is created on host PC, including android-info.txt zImage.ramdisk zImage.ramdisk-recovery system.img and userdata.img(the command will occur wrong).  
+
+4. erase one partition:
+   
+   fastboot.exe erase misc
+   fastboot.exe erase boot
+   fastboot.exe erase system
+   fastboot.exe erase userdata
+ 
+5. flash image file into partition:
+   
+   fastboot.exe flash:raw boot zImage.ramdisk
+   fastboot.exe flash:raw recovery zImage.ramdisk-recovery
+   fastboot.exe flash system system.img
+   fastboot.exe flash userdata userdata.img
+
+6. reboot system:
+ 
+   fastboot.exe reboot
+
+7. reboot into x-boot:
+   
+   fastboot.exe reboot-bootloader
+
+8. run zImage and ramdisk:
+ 
+   fastboot.exe boot zImage.ramdisk
+

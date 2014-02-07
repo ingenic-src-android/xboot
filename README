@@ -1,0 +1,62 @@
+
+			X-Boot Readme
+
+Branches
+-----------------
+  origin/Indroid-master-bluedroid
+  origin/Indroid4.3-branch
+  origin/Indroid4.3-master
+  origin/android-4.3_r2.2_mensa
+  origin/dev-ing-jb-local
+  origin/dev-ing-jb-local-4780-bbk-h6005
+  origin/dev-ing-jb-local-phone
+  origin/ing-jz4780     (-synced with github branch "jz-4780-4775-common")
+  origin/ing-new
+
+
+Sources directory
+-----------------
+
+  spl/		- contains the spl sources.
+  boot/	  	- contains the loader sources that will be loaded by spl.
+  Makefile	- top makefile
+  config.mk/rules.mk - common makefile includes.
+  mkconfig	- tool to create include/config.h
+  x-boot.lds	- linker script
+
+Build Steps
+-----------
+1. place the xboot folder under android/bootable/bootloader/
+
+2. setup the android build environment by ". build/envsetup.sh" and lunch.
+
+3. under xboot folder:
+   1) make clean
+   2) make urboard_nand_config
+   3) make
+
+NOTE: urboard.h for uart4 and urboard3.h for uart3. switch the file before compiling the target uart xboot.
+
+
+Porting Guide
+-------------
+
+  If you want to add a new board called 'myboard' based on JZ4760,
+  take following as reference.
+
+  1. Add the board config to x-boot/Makefile.
+
+     myboard_nand_config:	unconfig
+	@echo "#define CONFIG_NAND_X_BOOT" > include/config.h
+	@echo "Compile NAND boot image for myboard"
+	@./mkconfig jz4760 myboard
+	@echo "CONFIG_NAND_X_BOOT = y" > include/config.mk
+	@echo "CONFIG_JZ4760 = y" >> include/config.mk
+
+  2. Add the board definition to x-boot/include/configs/myboard.h.
+
+  3. Add jz4760.h to x-boot/include/.
+
+  4. Add JZ4760 nand spl padding support to x-boot/spl/tools/nand-spl-pad.sh.
+
+  5. Add your cpu and board specific codes as necessary.

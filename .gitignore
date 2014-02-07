@@ -1,0 +1,41 @@
+#
+# NOTE! Don't add files that are generated in specific
+# subdirectories here. Add them in the ".gitignore" file
+# in that subdirectory instead.
+#
+# NOTE! Please use 'git ls-files -i --exclude-standard'
+# command after changing this file, to see if there are
+# any tracked files which get ignored after the change.
+#
+# Normal rules
+#
+
+*~
+*.o
+*.a
+*.bin
+*.depend
+
+boot/mklogo.sh
+boot/mkxbootimg
+boot/x-boot
+boot/x-boot.S
+include/config.h
+include/config.mk
+spl/common/common.c
+spl/common/cpu.c
+spl/common/debug.c
+spl/common/jz_serial.c
+spl/msc-spl
+spl/msc-spl.dump
+spl/nand-spl
+spl/nand-spl.dump
+spl/tools/mbr_creater/mbr.h
+spl/tools/mbr_creater/mbr_creater
+*~
+*.o
+*.cmd
+
+GTAGS
+GRTAGS
+GPATH

@@ -1,0 +1,34 @@
+#!/bin/sh -e
+
+# Script to create header files and links to configure
+# XBoot for a specific board.
+#
+# Parameters:  CPU Board
+#
+
+CPU_NAME="$1"
+BOARD_NAME="$2"
+BOARDDIR="$2"
+
+echo "Configuring for ${CPU_NAME} ${BOARD_NAME} board..."
+
+echo >> include/config.h
+echo "/* Automatically generated - do not edit */" >>include/config.h
+echo "#include <configs/$2.h>" >>include/config.h
+echo "#include <$1.h>" >>include/config.h
+echo "BOARDDIR = $2" >>include/config.mk
+#echo "#include <configs/jz4760_common.h>" >>include/config.h
+
+echo >> include/config.h
+echo "#define SPL_LOAD_ADDR ${SPL_LOAD_ADDR}"
+echo "--------------------"
+echo "#define SPL_LOAD_ADDR ${SPL_LOAD_ADDR}" >>include/config.h
+echo "#define X_BOOT_LOAD_ADDR ${X_BOOT_LOAD_ADDR}" >>include/config.h
+
+if [ $# -ge 3 ]; then
+	if [ $3 = "msc" ]; then
+	cp ./boot/board/$2/mbr.h ./spl/tools/mbr_creater/mbr.h -rf
+	fi
+fi
+
+exit 0

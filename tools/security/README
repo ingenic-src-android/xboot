@@ -1,0 +1,13 @@
+[USAGE]:
+    signatures_* [File] [Offset of the DATA being encrypted(Byte)] [Length of DATA being encrypted(KB)]
+For example:
+    X-Boot for NAND Flash:
+    ./signatures_spl x-boot-nand.bin 0 6
+    Firmware for USB-Tool:
+    ./signatures_spl fw_ddr3.bin 0 6
+    Firmware for BURNER:
+    ./signatures_spl 2G-warrior-unmd5-burner.fw 0 6
+    Kernel:
+    ./signatures_kernel boot.img 2048 6
+    Bootloader:
+    ./signatures_bootloader x-boot3.bin 0 6
